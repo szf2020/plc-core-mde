@@ -241,8 +241,12 @@
       <div class="btn-label">Manual</div>
       <div class="btn-desc">Ejemplos y bloques</div>
     </a>
-    <!-- Fila 2: RUN y STOP centrados (ocupan col 2 y 3) -->
-    <div style="grid-column:1/2;"></div>
+    <!-- Fila 2: ABOUT, RUN, STOP -->
+    <a href="about.html" class="menu-btn">
+      <div class="btn-icon">ℹ</div>
+      <div class="btn-label">About</div>
+      <div class="btn-desc">Sistema / Licencia</div>
+    </a>
     <a href="#" class="menu-btn" onclick="fetch('/plc/run').then(()=>updateMode()); return false;">
       <div class="btn-icon">▶</div>
       <div class="btn-label">RUN</div>
