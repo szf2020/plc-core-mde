@@ -1,135 +1,191 @@
 # PLC-CORE-MDE
 
-Open modular PLC based on ESP32 with web interface, IEC61131 FBD programming, RS485 Modbus expansion and cloud simulator support.
+**PLC modular abierto basado en ESP32 con programación FBD + Ladder, simulador web y arquitectura industrial escalable**
 
 ---
 
-## Description
+## 🚀 Descripción
 
-PLC-CORE-MDE is an open, modular and scalable programmable logic controller (PLC) based on ESP32, designed for education, automation, industrial control and experimental development.
+**PLC-CORE-MDE** es un controlador lógico programable (PLC) modular, abierto y escalable, basado en ESP32, diseñado para:
 
-The project aims to provide a flexible, low-cost and high-performance control platform that can be expanded using external modules connected through RS485 using Modbus communication.
+* Automatización industrial
+* Domótica
+* Educación técnica
+* Desarrollo experimental
 
-The system includes an embedded web server that allows configuration, monitoring and programming directly from a web browser without the need for additional software.
+El sistema permite programar lógica de control utilizando:
 
-The programming interface is based on graphical Function Block Diagram (FBD) inspired by IEC 61131.
+👉 **FBD (Function Block Diagram)**
+👉 **Ladder (diagrama de contactos)**
 
----
-
-## Online simulator
-
-You can test the PLC-CORE-MDE interface online:
-
-https://martinentraigas07-design.github.io/plc-core-mde/
-
-The simulator runs the same web interface used by the embedded PLC and allows testing the editor, runtime and monitoring system directly in the browser.
-
-This simulator is intended for education, development and testing.
+Ambos basados en la norma **IEC 61131**, con conversión interna automática y consistente.
 
 ---
 
-## Main features
+## 🧠 Diferencial del sistema
 
-* ESP32 based core module
-* Embedded web server
-* Graphical programming using FBD (Function Block Diagram)
-* IEC 61131 inspired runtime engine
-* RS485 Modbus expansion bus
-* Automatic module detection
-* Digital inputs and outputs
-* Analog inputs and outputs
-* PWM outputs
-* Timers, counters and memory blocks
-* Modular hardware design
-* DIN rail mounting format
-* Educational oriented architecture
-* Open modular platform
-* Cloud simulator support (planned)
-* Virtual PLC for training and testing
+A diferencia de otros proyectos, PLC-CORE-MDE utiliza una arquitectura unificada basada en una:
+
+### 🔄 Representación Intermedia (IR)
+
+Esto permite coherencia total entre:
+
+**FBD ↔ IR ↔ Ladder ↔ Runtime**
+
+✔ Lo que ves en el simulador es lo mismo que ejecuta el hardware
+✔ No hay diferencias entre lógica visual y ejecución real
+✔ Permite múltiples lenguajes sobre un mismo núcleo
 
 ---
 
-## Architecture
+## 🌐 Simulador online
 
-### CORE module
+Podés probar el sistema completo directamente desde el navegador:
 
-* Processing
-* Runtime engine
-* Embedded web server
-* Communication manager
-* Modbus master
-* System configuration
+👉 https://martinentraigas07-design.github.io/plc-core-mde/
 
-### Expansion modules
+El simulador incluye:
 
-* Digital input modules
-* Digital output modules
-* Analog input modules
-* Analog output modules
-* Mixed IO modules
-* RS485 Modbus devices
-* Future communication modules
+* Editor FBD (Drawflow)
+* Conversión a Ladder
+* Runtime PLC completo en JavaScript
+* Monitor en tiempo real
+* Simulación de entradas/salidas
+* Módulos virtuales RS485
+
+💡 No requiere hardware
 
 ---
 
-## Future features
+## ✨ Características principales
 
-* Cloud PLC simulator
-* USB communication mode
-* Remote Modbus mode
-* Gateway mode
-* Ethernet / TCP mode
-* Hybrid simulation + real PLC
-* Multi-device support
-* Remote monitoring
-* Data logging
-* Web visualization panels
-
----
-
-## Project goals
-
-This project is intended for:
-
-* Technical education
-* Industrial automation learning
-* Experimental development
-* Custom control systems
-* Low-cost PLC applications
-* Embedded systems training
-* IEC61131 programming practice
-
-The project is designed to be understandable, modifiable and expandable.
+* ⚡ Núcleo basado en ESP32
+* 🌐 Servidor web embebido (sin software externo)
+* 🧩 Arquitectura modular RS485 / Modbus
+* 🔄 Programación en **FBD y Ladder**
+* 🧠 Runtime propio en C++ (PLC real)
+* 🧪 Simulador web completo (mismo comportamiento que el hardware)
+* 📡 Monitor en tiempo real
+* 🔍 Sistema de debug integrado
+* 🔌 Detección automática de módulos
+* 📦 Expansión mediante módulos externos
+* 🏭 Diseño para montaje en riel DIN
+* 🎓 Orientado a educación técnica y uso profesional
 
 ---
 
-## Repository structure
+## 🏗 Arquitectura del sistema
+
+### 🔹 Módulo CORE (ESP32)
+
+* Ejecución del programa PLC
+* Runtime de control
+* Servidor web embebido
+* Gestión de comunicaciones
+* Maestro Modbus RS485
+* Configuración del sistema
+
+---
+
+### 🔹 Módulos de expansión
+
+* Entradas digitales
+* Salidas digitales
+* Entradas analógicas
+* Salidas analógicas
+* Módulos mixtos
+* Dispositivos Modbus RS485
+* Futuros módulos de comunicación
+
+---
+
+## 🔄 Flujo de programación
+
+El sistema trabaja con un flujo unificado:
+
+**FBD (editor gráfico)**
+→ **IR (representación interna)**
+→ **Ladder (visualización industrial)**
+→ **Runtime (ejecución real o simulada)**
+
+Esto garantiza:
+
+✔ Consistencia total
+✔ Portabilidad entre simulador y hardware
+✔ Base sólida para futuras expansiones (IEC 61131 completo)
+
+---
+
+## 🧑‍💻 Cómo empezar
+
+### 🔹 Opción 1 — Simulador (recomendado)
+
+Abrí directamente:
+
+👉 https://martinentraigas07-design.github.io/plc-core-mde/
+
+---
+
+### 🔹 Opción 2 — PLC real
+
+1. Grabar firmware en ESP32
+2. Conectarse vía navegador
+3. Programar desde la interfaz web
+
+---
+
+## 📂 Estructura del repositorio
 
 ```
-firmware/    → ESP32 firmware and runtime
-hardware/    → schematics and PCB
-docs/        → manuals and technical documents
-simulator/   → web simulator
-web files    → embedded web server interface
+firmware/              → Runtime PLC (ESP32)
+firmware/data/         → Interfaz embebida
+simulator/             → Simulador web completo
+docs/                  → Documentación técnica
+hardware/              → Esquemáticos y PCB
 ```
 
 ---
 
-## Author
+## 🎯 Objetivos del proyecto
 
-Martín Entraigas
-Project: PLC-CORE-MDE
+PLC-CORE-MDE está diseñado para:
+
+* Educación técnica en automatización
+* Aprendizaje de lógica PLC (FBD / Ladder)
+* Desarrollo de sistemas de control personalizados
+* Proyectos de bajo costo
+* Experimentación con arquitectura industrial
+* Formación en IEC 61131
+
+---
+
+## 🔮 Futuro del proyecto
+
+* Simulación híbrida (PLC real + virtual)
+* Comunicación Ethernet / TCP
+* Gateway industrial
+* Monitoreo remoto
+* Registro de datos (data logging)
+* Paneles web de visualización
+* Soporte multi-dispositivo
+
+---
+
+## 👤 Autor
+
+**Martín Entraigas** - **MDE-ELECTRONICA**
 Argentina
 
+Proyecto enfocado en educación técnica, automatización y desarrollo abierto.
+
 ---
 
-## License
+## 🔐 Licencia
 
-PLC-CORE-MDE License v1.0
+**PLC-CORE-MDE License v1.0**
 
-Copyright (c) 2026 Martín Entraigas / PLC-CORE-MDE, Argentina
+* ✔ Uso educativo permitido
+* ⚠ Uso comercial requiere autorización
+* ✔ Modificaciones permitidas bajo condiciones
 
-Educational use allowed
-Commercial use requires authorization
-
-See LICENSE file for full terms.
+Ver archivo `LICENSE` para más detalles.
