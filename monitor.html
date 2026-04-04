@@ -5,14 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PLC-CORE-MDE — Monitor PRO</title>
 <link rel="stylesheet" href="style.css">
-<!-- ══ SIMULADOR PLC-CORE-MDE ══ -->
-<script src="simulator/plc_sim_state.js"></script>
-<script src="simulator/plc_sim_io.js"></script>
-<script src="simulator/plc_sim_modbus.js"></script>
-<script src="simulator/plc_sim_runtime.js"></script>
-<script src="simulator/plc_sim_scan.js"></script>
-<script src="simulator/sim_panel.js"></script>
-<!-- ══════════════════════════════ -->
 <script src="js/api/plc_api.js"></script>
 <style>
 /* ============================================================
@@ -857,22 +849,13 @@ addEvent('Connected to PLC-CORE-MDE', 'info');
 var mbPollTimer = null;
 var MB_POLL_MS  = 500;
 
-/* apiFetch — wrapper around fetch() for Modbus endpoints.
- * Uses the same path format as the firmware (/modbus/status, etc.).
- * When the simulator is active its fetch interceptor handles these
- * transparently. When the real PLC is connected they hit the ESP32.
- * Returns a Promise<Response> identical to native fetch(). */
-function apiFetch(path) {
-  return fetch(path);
-}
-
 function modbusDiscover() {
   var btn    = document.getElementById('mb-disc-btn');
   var status = document.getElementById('mb-disc-status');
   if (btn)    btn.style.opacity = '0.5';
   if (status) { status.textContent = 'scanning...'; status.style.display = ''; }
 
-  apiFetch('/modbus/discover')
+  fetch('/modbus/discover')
     .then(function(r) { return r.json(); })
     .then(function() {
       // Start polling immediately to pick up new results
@@ -889,7 +872,7 @@ function modbusDiscover() {
 }
 
 function modbusStatusPoll() {
-  apiFetch('/modbus/status')
+  fetch('/modbus/status')
     .then(function(r) { return r.json(); })
     .then(function(d) { renderModbusPanel(d); })
     .catch(function()  { /* silent — PLC may be offline */ });
