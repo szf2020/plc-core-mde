@@ -320,13 +320,25 @@
       case 'r_trig': result = { kind: 'edge', edgeType: 'R_TRIG', addr: _addrStr(nd) }; break;
       case 'f_trig': result = { kind: 'edge', edgeType: 'F_TRIG', addr: _addrStr(nd) }; break;
 
-      case 'ton': case 'tof': case 'tp':
-        result = { kind: 'block', blockType: nd.type.toUpperCase(), addr: _addrStr(nd), preset: nd.preset || 0, in1: nd.in1 };
+      case 'ton': case 'tof': case 'tp': {
+        // Build the block element for the timer
+        var _blk = { kind: 'block', blockType: nd.type.toUpperCase(), addr: _addrStr(nd), preset: nd.preset || 0 };
+        // If the timer has a driving input, prepend it as a CONTACT in series.
+        // This produces: [CONTACT(X0), BLOCK(TOF)] instead of just [BLOCK(TOF)].
+        result = (nd.in1 !== null && nd.in1 !== undefined && nd.in1 >= 0)
+          ? { kind: 'and', children: [ _buildExprTree(nd.in1, nodes, edgeMap, memo), _blk ] }
+          : _blk;
         break;
+      }
 
-      case 'ctu': case 'ctd':
-        result = { kind: 'block', blockType: nd.type.toUpperCase(), addr: _addrStr(nd), preset: nd.value || 0, in1: nd.in1 };
+      case 'ctu': case 'ctd': {
+        // Same pattern: prepend the enable input (in1) as a CONTACT in series.
+        var _cblk = { kind: 'block', blockType: nd.type.toUpperCase(), addr: _addrStr(nd), preset: nd.value || 0 };
+        result = (nd.in1 !== null && nd.in1 !== undefined && nd.in1 >= 0)
+          ? { kind: 'and', children: [ _buildExprTree(nd.in1, nodes, edgeMap, memo), _cblk ] }
+          : _cblk;
         break;
+      }
 
       case 'cmp': case 'blink':
         result = { kind: 'unc', irType: nd.type, irId: nd.id };
